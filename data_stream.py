@@ -92,7 +92,8 @@ if __name__ == "__main__":
     # TODO Create Spark in Standalone mode
     spark = SparkSession \
         .builder \
-        .master("local") \
+        .master("local[*]") \
+        .config("spark.ui.port", 3000) \
         .appName("KafkaSparkStructuredStreaming") \
         .getOrCreate()
 
