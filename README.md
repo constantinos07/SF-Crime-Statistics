@@ -1,6 +1,31 @@
 # SF-Crime-Statistics
 
-### Questions:
+## Project Overview:
+In this project, we will use a real-world dataset, extracted from Kaggle, on San Francisco crime incidents, and we will provide statistical analyses of the data using Apache Spark Structured Streaming. We will create a Kafka server to produce data, and ingest data through Spark Structured Streaming.
+
+## Environment Prerequisites:
+
+1. Spark 2.4.3
+2. Scala 2.11.x
+3. Java 1.8.x
+4. Kafka build with Scala 2.11.x
+5. Python 3.6.x or 3.7.x
+
+## How to run the project:
+
+1. Run `./start.sh` to install project requirements. If you use **pip** rather than conda, then use `pip install -r requirements.txt`
+
+2. Start **zookeeper server**: `/usr/bin/zookeeper-server-start config/zookeeper.properties`
+
+3. Open a new terminal and start **kafka server**: `/usr/bin/kafka-server-start.sh config/server.properties`
+
+4. Open a new terminal and run `python kafka_server.py`
+
+5. Open a new terminal and start **kafka-consumer-console**: `/usr/bin/kafka-consumer-console --bootstrap-server localhost:9091 --topic service.calls --from-beginning`
+
+6. Run **spark job**: `spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.4 --master local[*] data_stream.py`
+
+## Questions:
 1. How did changing values on the SparkSession property parameters affect the throughput and latency of the data?
 
 Kafka emits at the rate of 1/second and with the current sparkSession allowing maxOffsetsPerTrigger=200, 
